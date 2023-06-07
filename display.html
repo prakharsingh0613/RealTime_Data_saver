@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Display Page</title>
+  <style>
+    ul {
+      list-style-type: none;
+    }
+  </style>
+</head>
+<body>
+  <h2>Real-time Data:</h2>
+  <ul id="dataList"></ul>
+
+  <script>
+    function updateData() {
+      var data = JSON.parse(localStorage.getItem("data"));
+
+      // Clear existing data list
+      var dataList = document.getElementById("dataList");
+      dataList.innerHTML = "";
+
+      // Add textboxes data to the list
+      for (var i = 0; i < data.textboxes.length; i++) {
+        var listItem = document.createElement("li");
+        listItem.innerText = "Textbox " + (i + 1) + ": " + data.textboxes[i];
+        dataList.appendChild(listItem);
+      }
+
+      // Add checkboxes data to the list
+      for (var i = 0; i < 7; i++) {
+        var listItem = document.createElement("li");
+        var checkboxText = "Checkbox " + (i + 1) + ": ";
+        if (data.checkboxes.includes(i + 1)) {
+          checkboxText += "Checked";
+        } else {
+          checkboxText += "Unchecked";
+        }
+        listItem.innerText = checkboxText;
+        dataList.appendChild(listItem);
+      }
+    }
+
+    // Update data initially
+    updateData();
+
+    // Update data in real-time
+    window.addEventListener("storage", function () {
+      updateData();
+    });
+  </script>
+</body>
+</html>

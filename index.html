@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Input Page</title>
+  <style>
+    *{
+        background-color: rgb(118, 118, 167);
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    .main{
+        text-align: center;
+    }
+    .main img{
+        text-align: center;
+        height: 155px;
+    }
+    .inputCon #inputForm {
+       text-align: center;
+       /* border: none; */
+    }
+    .checkBox{
+        display: flex;
+        padding: 33px;
+        margin-left: 29px;
+        text-align: center;
+    }
+    .submit{
+        text-align: center;
+        text-decoration: none;
+        padding: 15px;
+        margin: 30px;
+    }
+    .submit:hover{
+     background-color: blueviolet;
+    }
+  </style>
+</head>
+<body>
+<div class="main">
+    <h1>Real Time Form Filling</h1>
+    <img src="https://www.technoheight.com/images/form-filling.png" alt="">
+</div>
+
+
+<div class="inputCon">
+  <form id="inputForm">
+    <label for="textbox1">First Name:</label>
+    <input type="text" id="textbox1" />
+
+    <label for="textbox2">Last Name:</label>
+    <input type="text" id="textbox2" />
+
+    <label for="textbox3">Age:</label>
+    <input type="text" id="textbox3" />
+
+    <label for="textbox4">Email:</label>
+    <input type="text" id="textbox4" />
+
+    <label for="textbox5">State:</label>
+    <input type="text" id="textbox5" />
+
+    <label for="textbox6">City:</label>
+    <input type="text" id="textbox6" />
+
+    <label for="textbox7">Address:</label>
+    <input type="text" id="textbox7" />
+
+</div>
+<div class="checkBox">
+    <label for="checkbox1">
+      <input type="checkbox" id="checkbox1" />
+      First_Name
+    </label>
+
+    <label for="checkbox2">
+      <input type="checkbox" id="checkbox2" />
+      Last Name
+    </label>
+
+    <label for="checkbox3">
+      <input type="checkbox" id="checkbox3" />
+      Age
+    </label>
+
+    <label for="checkbox4">
+      <input type="checkbox" id="checkbox4" />
+      Email
+    </label>
+
+    <label for="checkbox5">
+      <input type="checkbox" id="checkbox5" />
+      State
+    </label>
+
+    <label for="checkbox6">
+      <input type="checkbox" id="checkbox6" />
+      City
+    </label>
+
+    <label for="checkbox7">
+      <input type="checkbox" id="checkbox7" />
+      Address
+    </label>
+</div>
+<div class="submit">
+    <input type="submit" value="Submit" />
+</div>
+
+  </form>
+
+  <script>
+    document.getElementById("inputForm").addEventListener("submit", function (event) {
+      event.preventDefault(); // Prevent form submission
+
+      // Retrieve the values of textboxes
+      var textboxValues = [];
+      for (var i = 1; i <= 7; i++) {
+        var textbox = document.getElementById("textbox" + i);
+        textboxValues.push(textbox.value);
+      }
+
+      // Retrieve the checked checkboxes
+      var checkedCheckboxes = [];
+      for (var i = 1; i <= 7; i++) {
+        var checkbox = document.getElementById("checkbox" + i);
+        if (checkbox.checked) {
+          checkedCheckboxes.push(i);
+        }
+      }
+
+      // Send the data to the display page
+      var data = {
+        textboxes: textboxValues,
+        checkboxes: checkedCheckboxes,
+      };
+      localStorage.setItem("data", JSON.stringify(data));
+
+      alert("Data submitted successfully!");
+    });
+  </script>
+</body>
+</html>
